@@ -37,6 +37,26 @@ Repositorio destinado al registro, seguimiento y documentación de actividades, 
   - Realizar pruebas de instanciación y verificar el funcionamiento de los métodos en consola.
   - Agregar nuevas clases derivadas o relaciones de herencia según el avance del módulo.
 
+### Sesión 2: 09/09/2026
+- **Objetivo:** Implementar herencia en POO con la creación de clases derivadas (`AUTO`, `camion`, `moto`), incorporar nuevos atributos, documentar línea por línea el código de los módulos Python y publicar los avances en la rama `feature/desarrollo`.
+- **Actividades realizadas:**
+  - [x] Refactorización del tipado de atributos a nivel de instanciación en el constructor `__init__` (`self.atributo: tipo = valor`).
+  - [x] Incorporación de los métodos `tarifa_hora()`, `get_patente()` y `get_anio()` en la clase base `VEHICULO`.
+  - [x] Creación de clases derivadas en archivos independientes: `AUTO` (`auto.py`), `camion` (`camion.py`) y `moto` (`moto.py`) heredando de `VEHICULO`.
+  - [x] Incorporación de atributos específicos `marca` y `modelo` con tipado de datos en el constructor de la clase `moto`.
+  - [x] Documentación exhaustiva con comentarios explicativos línea por línea en todos los archivos `.py` del proyecto.
+  - [x] Pruebas de ejecución e integración en `main.py`.
+  - [x] Configuración de archivo `.gitignore` para ignorar archivos temporales y bytecode (`__pycache__/`, `*.pyc`).
+  - [x] Publicación y sincronización de cambios en la rama `feature/desarrollo` en GitHub.
+- **Conceptos aprendidos:**
+  - Herencia en Python usando la sintaxis `class SubClase(ClasePadre)`.
+  - Uso de `super().__init__()` para invocar el constructor de la clase base desde una subclase.
+  - Firma de constructores extendidos con parámetros adicionales y tipado explícito.
+  - Documentación de código y buenas prácticas para control de versiones ignorando archivos `.pyc` / `__pycache__`.
+- **Próximos pasos:**
+  - Definir métodos y atributos específicos para `AUTO` y `camion`.
+  - Implementar polimorfismo sobreescribiendo el método `tarifa_hora()` en cada clase derivada.
+
 ---
 
 ## 📂 Recursos y Enlaces
