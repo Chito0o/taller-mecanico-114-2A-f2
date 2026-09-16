@@ -1,7 +1,9 @@
-# Importa la clase base Vehiculo desde el módulo vehiculo
-from vehiculo import Vehiculo
+from vehiculo import Vehiculo # Importa la clase base Vehiculo desde vehiculo.py
+from modelo import Modelo
 
-# Define la clase Moto que hereda de la clase base Vehiculo
-class Moto(Vehiculo):
-    # Declaración pass indica que por ahora la clase no añade métodos o atributos adicionales
-    pass
+class Moto(Vehiculo): # Define la clase Moto heredando de Vehiculo
+    def __init__(self, patente: str, anio: int, modelo: Modelo):
+        super().__init__(patente, anio, modelo)
+
+    def tarifa_hora(self) -> int: # Método que sobrescribe la tarifa por hora para Moto
+        return 15000 # Retorna un valor fijo de 15000 para moto

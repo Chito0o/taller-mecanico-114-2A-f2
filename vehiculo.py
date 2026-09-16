@@ -1,24 +1,44 @@
-# Definición de la clase base Vehiculo para representar los vehículos en el sistema
-class Vehiculo:
-    # Método constructor que inicializa los atributos de instancia de Vehiculo
-    def __init__(self, patente: str, anio: int) -> None:
-        # Asigna la patente del vehículo (tipo texto) a la instancia
-        self.patente: str = patente
-        # Asigna el año de fabricación (tipo entero) a la instancia
-        self.anio: int = anio
-        # Inicializa el atributo protegido que indica si está en taller en False (tipo booleano)
-        self._en_taller: bool = False
+from modelo import Modelo
 
-    # Método para registrar el ingreso del vehículo al taller
-    def ingresar_al_taller(self) -> None:
-        # Cambia el estado del atributo protegido a True indicando que está en el taller
-        self._en_taller = True
+class Vehiculo: # Define la clase Vehiculo
+    def __init__(self, patente: str, anio: int, modelo: Modelo): # Constructor que recibe patente, año y modelo
+        self.patente = patente # Asigna la patente mediante el setter para ejecutar la validación
+        self.__anio: int = anio # Asigna el año recibido a un atributo privado
+        self.__en_taller: bool = False # Inicializa el estado en False (no está en el taller por defecto) como privado
+        self.__modelo: Modelo = modelo
 
-    # Método para registrar la entrega y salida del vehículo del taller
-    def entregar_al_cliente(self) -> None:
-        # Cambia el estado del atributo protegido a False indicando que ya no está en el taller
-        self._en_taller = False
+    @property
+    def modelo(self) -> Modelo:
+        return self.__modelo
 
-    # Método para retornar la tarifa genérica por hora del vehículo
-    def tarifa_hora(self) -> int:
-        return 5000
+    
+    @property
+    def patente(self) -> str: # Getter que permite acceder a la patente como atributo (vehiculo.patente)
+        return self.__patente # Retorna el valor del atributo privado __patente
+
+    @patente.setter
+    def patente(self, valor: str) -> None: # Setter que intercepta las asignaciones para validar la patente
+        if len(valor) < 6 or " " in valor: # Valida que la patente tenga al menos 6 caracteres y sin espacios
+            raise ValueError("La patente debe tener al menos 6 caracteres y no debe contener espacios.") # Lanza error si no es válida
+        self.__patente: str = valor # Asigna el valor validado al atributo privado __patente
+
+    def get_patente(self) -> str: # Método alternativo getter tradicional
+        return self.patente # Retorna la patente a través de la propiedad
+
+    def set_patente(self, valor: str) -> None: # Método alternativo setter tradicional
+        self.patente = valor # Asigna a través del setter de la propiedad con validación
+
+    def ingresar(self) -> str: # Método para registrar el ingreso del vehículo al taller
+        if self.__en_taller: # Verifica si el vehículo ya está marcado como dentro del taller
+            return "El vehículo ya se encuentra en el taller." # Devuelve mensaje si ya estaba ingresado
+        self.__en_taller = True # Cambia el estado a True (ingresado)
+        return "El vehículo ha ingresado al taller." # Devuelve mensaje de éxito
+
+    def entregar(self) -> str: # Método para registrar la salida o entrega del vehículo
+        if not self.__en_taller: # Verifica si el vehículo no está en el taller
+            return "El vehículo no se encuentra en el taller." # Devuelve mensaje indicando que no se puede entregar
+        self.__en_taller = False # Cambia el estado a False (fuera del taller)
+        return "El vehículo ha sido entregado." # Devuelve mensaje de éxito
+
+    def tarifa_hora(self) -> int: # Método que retorna el costo de la tarifa por hora
+        return 5000 # Retorna un valor fijo de 5000
