@@ -1,36 +1,46 @@
-# Importa la clase base Vehiculo desde el módulo vehiculo
 from model.vehiculo import Vehiculo
-# Importa la clase derivada Auto desde el módulo auto
 from model.auto import Auto
-# Importa la clase derivada Moto desde el módulo moto
 from model.moto import Moto
-# Importa la clase derivada Camion desde el módulo camion
 from model.camion import Camion
+from marca import Marca
+from modelo import Modelo
 
-# Instancia un objeto de la clase base Vehiculo con patente "1234" y año 1930
-v = Vehiculo("1234", 1930)
-# Instancia un objeto de la clase derivada Auto con patente "auto1234" y año 1930
-a = Auto("auto1234", 1930)
 
-# Registra el ingreso del objeto Auto al taller cambiando su estado interno
-a.ingresar_al_taller()
+# Instanciación de objetos de dependencias
+marca_toyota = Marca("Toyota")
+modelo_yaris = Modelo("Yaris", marca_toyota)
 
-# Muestra en consola la patente del auto instanciado
-print(a.patente)
+marca_honda = Marca("Honda")
+modelo_cbr = Modelo("CBR", marca_honda)
 
-# Registra el ingreso del objeto Vehiculo al taller cambiando su estado interno
-v.ingresar_al_taller()
-# Muestra un mensaje en consola indicando el ingreso al taller
-print("Vehiculo en taller")
+marca_volvo = Marca("Volvo")
+modelo_fh = Modelo("FH", marca_volvo)
 
-# Muestra en consola el estado del atributo protegido _en_taller del vehículo (True)
-print(v._en_taller)
+# Instanciación de objetos
+vehiculo_base = Vehiculo("BASE01", 2015, modelo_yaris) # Instancia un objeto Vehiculo base
 
-# Muestra en consola el valor retornado por el método tarifa_hora() del vehículo (5000)
-print(v.tarifa_hora())
+try:
+    auto = Auto("AB12", 2018, modelo_yaris, 200) # Instancia un objeto Auto con capacidad de maletero
+except ValueError as e:
+    print(f"Error generado: {e}")
+    auto = Auto("AB1234", 2018, modelo_yaris, 200) # Instancia válida para continuar la ejecución
 
-# Registra la entrega del vehículo al cliente cambiando su estado interno
-v.entregar_al_cliente()
+moto = Moto("CD5678", 2020, modelo_cbr) # Instancia un objeto Moto
+camion = Camion("EF9012", 2023, modelo_fh, 5000) # Instancia un objeto Camion con capacidad de carga
 
-# Muestra en consola el estado del atributo protegido _en_taller del vehículo (False)
-print(v._en_taller)
+# Pruebas de ingreso al taller
+print(auto.ingresar()) # Ejecuta ingresar() del auto
+print(moto.ingresar()) # Ejecuta ingresar() de la moto
+print(camion.ingresar()) # Ejecuta ingresar() del camión
+
+# Pruebas de encapsulamiento y asignación de patente
+pruebaEnc = camion.patente # Obtiene la patente del camión
+camion.set_patente("EF9012") # Asigna una nueva patente válida usando el método setter
+print(f"Patente obtenida: {pruebaEnc}") # Imprime la patente obtenida
+
+
+# Pruebas de tarifa_hora()
+print(f"Tarifa por hora Vehiculo Base: ${vehiculo_base.tarifa_hora()}") # Tarifa base (5000)
+print(f"Tarifa por hora Auto: ${auto.tarifa_hora()}") # Tarifa sobreescrita Auto (25000)
+print(f"Tarifa por hora Moto: ${moto.tarifa_hora()}") # Tarifa sobreescrita Moto (15000)
+print(f"Tarifa por hora Camión: ${camion.tarifa_hora()}") # Tarifa sobreescrita Camion (40000)
