@@ -1,5 +1,5 @@
 # Importa la clase base Vehiculo desde el módulo vehiculo
-from vehiculo import Vehiculo
+from model.vehiculo import Vehiculo
 
 # Define la clase Camion que hereda de la clase base Vehiculo
 class Camion(Vehiculo):

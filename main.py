@@ -1,11 +1,11 @@
 # Importa la clase base Vehiculo desde el módulo vehiculo
-from vehiculo import Vehiculo
+from model.vehiculo import Vehiculo
 # Importa la clase derivada Auto desde el módulo auto
-from auto import Auto
+from model.auto import Auto
 # Importa la clase derivada Moto desde el módulo moto
-from moto import Moto
+from model.moto import Moto
 # Importa la clase derivada Camion desde el módulo camion
-from camion import Camion
+from model.camion import Camion
 
 # Instancia un objeto de la clase base Vehiculo con patente "1234" y año 1930
 v = Vehiculo("1234", 1930)
